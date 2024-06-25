@@ -12,11 +12,12 @@ type Props = {
   options?: { value: string; label: string; id: string }[];
   label?: string;
   placholder?: string;
-  register: UseFormRegister<FieldValues>;
+  register: UseFormRegister<any>;
   name: string;
   errors: FieldErrors<FieldValues>;
   lines?: number;
   form?: string;
+  value?: string
 };
 
 const FormGenertor = ({
@@ -30,6 +31,7 @@ const FormGenertor = ({
   errors,
   lines,
   form,
+  value
 }: Props) => {
   switch (inputType) {
     case "input":
@@ -41,6 +43,7 @@ const FormGenertor = ({
             type={type}
             placeholder={placholder}
             form={form}
+            value={value}
             {...register(name)}
           />
           <ErrorMessage
@@ -86,6 +89,7 @@ const FormGenertor = ({
             placeholder={placholder}
             form={form}
             {...register(name)}
+            value={value}
             rows={lines}
           />
           <ErrorMessage

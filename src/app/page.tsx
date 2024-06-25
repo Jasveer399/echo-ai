@@ -1,5 +1,5 @@
 "use client";
-import HomeSection from "@/components/homesection/index";
+import HomeSection from "@/components/homesection/homeSection";
 import NavBar from "@/components/navbar";
 
 export default function Home() {

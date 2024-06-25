@@ -68,4 +68,5 @@ export const USER_LOGIN_FORM: UserRegistrationProps[] = [
     type: "password",
     label:"Enter Password",
   },
+
 ];

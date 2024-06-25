@@ -1,6 +1,8 @@
-"use server";
+'use server'
 
 import { client } from "@/lib/prisma";
+import { currentUser, redirectToSignIn } from '@clerk/nextjs'
+import { OnGetAllAccountDomains } from "../settings";
 
 export const oncomleleUserRegistration = async (
   fullname: string,
@@ -27,6 +29,31 @@ export const oncomleleUserRegistration = async (
       return { status: 200, user: registered };
     }
   } catch (error) {
-    return { status: 400};
+    return { status: 400 };
   }
 };
+
+export const onLoginUser = async () => {
+  const user = await currentUser()
+  if (!user) redirectToSignIn()
+  else {
+    try {
+      const authenticated = await client.user.findUnique({
+        where: {
+          clerkId: user.id,
+        },
+        select: {
+          fullname: true,
+          id: true,
+          type: true,
+        },
+      })
+      if (authenticated) {
+        const domains = await OnGetAllAccountDomains()
+        return { status: 200, user: authenticated, domain: domains?.domains }
+      }
+    } catch (error) {
+      return { status: 400 }
+    }
+  }
+}

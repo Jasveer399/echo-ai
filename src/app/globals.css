@@ -18,6 +18,11 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+/* ConversationSearch.css */
+
+.option-style {
+  @apply text-sm px-3 py-2 bg-neutral-800;
+}
 
 @layer base {
   :root {

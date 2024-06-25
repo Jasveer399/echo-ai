@@ -94,7 +94,7 @@ model CustomerResponses {
 
 model Customer {
   id    String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  email String? 
+  email String?
 
   questions CustomerResponses[]
 
@@ -170,4 +170,12 @@ enum Plans {
 enum Role {
   user
   assistant
+}
+
+model Comments {
+  id          String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String
+  email       String @unique
+  imageUrl    String
+  description String
 }
