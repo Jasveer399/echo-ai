@@ -13,9 +13,6 @@ const Breadcrumpb = (props: Props) => {
     loading,
     page,
     onActivateRealtime,
-    onExpand,
-    onGetCurrentMode,
-    onSignOut,
     realtime,
   } = useSidebar();
   return (

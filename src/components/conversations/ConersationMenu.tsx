@@ -34,7 +34,7 @@ const ConersationMenu = ({ domains }: Props) => {
               {chatRooms.length ? (
                 chatRooms.map((chatRoom) => (
                   <ChatCard
-                    seen={chatRoom.chatRoom[0].message[0].seen}
+                    seen={chatRoom.chatRoom[0].message[0]?.seen}
                     id={chatRoom.chatRoom[0].id}
                     onChat={() =>
                       onGetActiveChatMessages(chatRoom.chatRoom[0].id)

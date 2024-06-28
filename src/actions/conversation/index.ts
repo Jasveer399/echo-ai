@@ -133,20 +133,20 @@ export const onViewUnreadMessages = async (id: string) => {
   }
 };
 
-// export const onRealTimeChat = async (
-//   chatroomId: string,
-//   message: string,
-//   id: string,
-//   role: "assistant" | "user"
-// ) => {
-//   pusherServer.trigger(chatroomId, "realtime-mode", {
-//     chat: {
-//       message,
-//       id,
-//       role,
-//     },
-//   });
-// };
+export const onRealTimeChat = async (
+  chatroomId: string,
+  message: string,
+  id: string,
+  role: "assistant" | "user"
+) => {
+  pusherServer.trigger(chatroomId, "realtime-mode", {
+    chat: {
+      message,
+      id,
+      role,
+    },
+  });
+};
 
 export const onOwnerSendMessage = async (
   chatroom: string,

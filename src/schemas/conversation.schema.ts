@@ -8,7 +8,6 @@ export type ConversationSearchprops = {
 
 export type ChatBotMessageProps = {
   content?: string;
-  image?: any;
 };
 
 export const ConversationSchema: ZodType<ConversationSearchprops> = z.object({
@@ -23,15 +22,4 @@ export const ChatBotMessageSchema: ZodType<ChatBotMessageProps> = z
       .min(1)
       .optional()
       .or(z.literal("").transform(() => undefined)),
-    image: z.any().optional(),
-  })
-  .refine((schema) => {
-    if (schema.image?.length) {
-      if (
-        ACCEPTED_FILE_TYPES.includes(schema.image?.[0].type!) &&
-        schema.image?.[0].size <= MAX_UPLOAD_SIZE
-      ) {
-        return true;
-      }
-    }
   });

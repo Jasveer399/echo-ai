@@ -31,6 +31,7 @@ import { toast } from "../ui/use-toast";
 import axios from "axios";
 import { Spinner } from "../spinner";
 import UploadImage from "./UploadImage";
+import { generateText } from "@/actions/bot";
 
 type itemProps = {
   quote: string;
@@ -52,6 +53,7 @@ const HomeSection = (props: Props) => {
   const [name, setName] = useState<string>("");
   const [commentsFetched, setCommentsFetched] = useState<boolean>(false);
   const [file, setFile] = useState<File | null>(null);
+  const [text, setText] = useState<string>("");
 
   const handelSubmitComment = async () => {
     try {
@@ -122,6 +124,11 @@ const HomeSection = (props: Props) => {
   useEffect(() => {
     getAllComments();
   }, []);
+
+  const gettext = async () => {
+    const res = await generateText(text);
+    console.log("Ai Response: ", res);
+  };
 
   return (
     <>
@@ -222,8 +229,7 @@ const HomeSection = (props: Props) => {
         className="flex justify-center items-center flex-col gap-4 mt-20 p-20"
       >
         <div className="md:flex w-screen justify-center">
-        <div className="absolute left-20">
-        </div>
+          <div className="absolute left-20"></div>
           <h2 className="text-4xl text-center font-bold">
             What People Are Saying
           </h2>
@@ -298,6 +304,8 @@ const HomeSection = (props: Props) => {
           )}
         </div>
       </section>
+      <Input onChange={(e) => setText(e.target.value)} type="text" />
+      <Button onClick={gettext}>Submit</Button>
     </>
   );
 };

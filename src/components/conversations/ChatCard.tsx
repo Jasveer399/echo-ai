@@ -24,9 +24,9 @@ const ChatCard = ({
   seen,
   id,
 }: Props) => {
-  const { messageSetAt, onSeenChat, urgent } = useChatTime(createdAt, id);
+  const { messageSetAt, urgent } = useChatTime(createdAt, id);
   return (
-    <Card className="rounded-none border-r-0 hover:bg-muted cursor-pointer transition duration-150 ease-in-out">
+    <Card onClick={onChat} className="rounded-none border-r-0 hover:bg-muted cursor-pointer transition duration-150 ease-in-out">
       <CardContent className="py-4 flex gap-3">
         <div>
           <Avatar>

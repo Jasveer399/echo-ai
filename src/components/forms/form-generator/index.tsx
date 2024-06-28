@@ -18,6 +18,7 @@ type Props = {
   lines?: number;
   form?: string;
   value?: string
+  defaultValue?: string
 };
 
 const FormGenertor = ({
@@ -29,6 +30,7 @@ const FormGenertor = ({
   register,
   name,
   errors,
+  defaultValue,
   lines,
   form,
   value
@@ -42,6 +44,7 @@ const FormGenertor = ({
             id={`input-${label}`}
             type={type}
             placeholder={placholder}
+            defaultValue={defaultValue}
             form={form}
             value={value}
             {...register(name)}
@@ -87,6 +90,7 @@ const FormGenertor = ({
           <Textarea
             id={`input-${label}`}
             placeholder={placholder}
+            defaultValue={defaultValue}
             form={form}
             {...register(name)}
             value={value}

@@ -11,6 +11,7 @@ type Props = {
 const CodeSnippet = ({ id }: Props) => {
   const { toast } = useToast()
   let snippet = `
+  <script>
     const iframe = document.createElement("iframe");
     
     const iframeStyles = (styleString) => {
@@ -21,6 +22,7 @@ const CodeSnippet = ({ id }: Props) => {
     
     iframeStyles('
         .chat-frame {
+            height: 592px;
             position: fixed;
             bottom: 50px;
             right: 50px;
@@ -39,6 +41,7 @@ const CodeSnippet = ({ id }: Props) => {
         iframe.height = dimensions.height
         iframe.contentWindow.postMessage("${id}", "http://localhost:3000/")
     })
+        </script>
         `
 
   return (
