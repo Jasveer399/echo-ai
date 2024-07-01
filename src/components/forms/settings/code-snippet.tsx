@@ -11,7 +11,7 @@ type Props = {
 const CodeSnippet = ({ id }: Props) => {
   const { toast } = useToast()
   let snippet = `
-  <script>
+ <script>
     const iframe = document.createElement("iframe");
     
     const iframeStyles = (styleString) => {
@@ -30,16 +30,16 @@ const CodeSnippet = ({ id }: Props) => {
         }
     ')
     
-    iframe.src = "${process.env.HOST_URL}/chatbot"
+    iframe.src = "http://localhost:3000/chatbot"
     iframe.classList.add('chat-frame')
     document.body.appendChild(iframe)
     
     window.addEventListener("message", (e) => {
-        if(e.origin !== "${process.env.HOST_URL}") return null
+        if(e.origin !== "http://localhost:3000") return null
         let dimensions = JSON.parse(e.data)
         iframe.width = dimensions.width
         iframe.height = dimensions.height
-        iframe.contentWindow.postMessage("${id}", "${process.env.HOST_URL}/")
+        iframe.contentWindow.postMessage("98cbc9de-cf54-4eb2-896e-08cb42d16565", "http://localhost:3000/")
     })
         </script>
         `
