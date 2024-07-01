@@ -23,8 +23,7 @@ type Props = {
 };
 
 const DomainMenu = ({ min, domains }: Props) => {
-  const { register, onAddDomain, loading, errors, isDomain, url } =
-    useDomain();
+  const { register, onAddDomain, loading, errors, isDomain, url } = useDomain();
   return (
     <div className={cn("flex flex-col gap-3", min ? "mt-6" : "mt-3")}>
       <div className="flex justify-between w-full items-center">
@@ -33,7 +32,11 @@ const DomainMenu = ({ min, domains }: Props) => {
           description="add in your domain address to integrate your chatbot"
           title="Add your business domain"
           onOpen={
-            <div className={`cursor-pointer text-gray-500 rounded-full hover:bg-white p-1 border  ${min && 'ml-2'}`}>
+            <div
+              className={`cursor-pointer text-gray-500 rounded-full hover:bg-white p-1 border  ${
+                min && "ml-2"
+              }`}
+            >
               <Plus />
             </div>
           }
@@ -66,7 +69,11 @@ const DomainMenu = ({ min, domains }: Props) => {
           </Loader>
         </AppDrawer>
       </div>
-      <divclassName={`flex flex-col gap-1 text-ironside font-medium`}>
+      <div
+        className={`flex flex-col gap-1 text-ironside font-medium ${
+          min ? "items-center ml-2" : ""
+        }`}
+      >
         {domains &&
           domains.map((domain) => (
             <Link
@@ -81,8 +88,8 @@ const DomainMenu = ({ min, domains }: Props) => {
               <Image
                 src={domain.icon!}
                 alt="Logo"
-                width={min?40:70}
-                height={min?40:70}
+                width={30}
+                height={30}
               />
               {!min && <p className="texts">{domain.name}</p>}
             </Link>
