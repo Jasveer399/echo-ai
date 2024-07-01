@@ -38,13 +38,13 @@ function NavBar() {
           height={0}
         />
       </div>
-      <ul className="gap-5 justify-between self-stretch my-auto text-sm leading-5 text-neutral-700 max-md:flex-wrap max-md:max-w-full font-normal hidden md:flex">
+      {/* <ul className="gap-5 justify-between self-stretch my-auto text-sm leading-5 text-neutral-700 max-md:flex-wrap max-md:max-w-full font-normal hidden md:flex">
         <li>Home</li>
         <li>Pricing</li>
         <li>News Room</li>
         <li>Features</li>
         <li>Contact us</li>
-      </ul>
+      </ul> */}
       <div className="gap-4 flex">
         <Link
           href="/settings"
@@ -53,10 +53,10 @@ function NavBar() {
           Free Trial
         </Link>
         <Button
-          onClick={gotosetting}
+          onClick={handleLogout}
           className="bg-orange px-4 py-2 text-white font-bold hover:bg-orange/95"
         >
-          Settings
+          Logout
         </Button>
       </div>
     </div>

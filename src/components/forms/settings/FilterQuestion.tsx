@@ -49,7 +49,7 @@ const FilterQuestion = ({ id }: Props) => {
         <Loader loading={loading}>
           {isQuestions.length ? (
             isQuestions.map((question,index) => (
-              <div className="flex gap-2">
+              <div className="flex gap-2" key={index}>
                 {`${index+1}.`}
                 <p className="font-bold" key={question.id}>
                 {question.question}

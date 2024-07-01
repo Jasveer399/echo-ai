@@ -1,5 +1,4 @@
 "use server";
-
 import { client } from "@/lib/prisma";
 import { clerkClient, currentUser } from "@clerk/nextjs";
 
@@ -190,6 +189,7 @@ export const OnGetCurrentDomainInfo = async (domain: string) => {
             name: true,
             icon: true,
             userId: true,
+            products: true,
             chatBot: {
               select: {
                 welcomeMessage: true,
@@ -507,34 +507,67 @@ export const onGetALLFilterQuestions = async (id: string) => {
         question: "asc",
       },
     });
+    return {
+      status: 200,
+      message: "Filter Questions Fetched Successfully",
+      questions: questions,
+    };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const ongetStripeConnect = async () => {
+  try {
+    const user = await currentUser();
+    if (user) {
+      const connected = await client.user.findUnique({
+        where: {
+          clerkId: user.id,
+        },
+        select: {
+          stripeId: true,
+        },
+      });
+      if (connected) {
+        return connected.stripeId;
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const onCreateNewProduct = async (
+  id: string,
+  name: string,
+  price: string,
+  image: string
+) => {
+  try {
+    const product = await client.domain.update({
+      where: {
+        id,
+      },
+      data: {
+        products: {
+          create: {
+            name,
+            image,
+            price: parseInt(price),
+          },
+        },
+      },
+    });
+    if (product) {
       return {
         status: 200,
-        message: "Filter Questions Fetched Successfully",
-        questions: questions,
+        message: "Product Created Successfully",
       };
+    }
   } catch (error) {
     console.log(error);
   }
 };
 
 
-export const ongetStripeConnect = async ()=>{
-  try {
-        const user = await currentUser();
-          if (user) {
-            const connected = await client.user.findUnique({
-              where:{
-                clerkId:user.id,
-              },
-              select:{
-                stripeId:true,
-              }
-            })
-            if (connected) {
-               return connected.stripeId
-            }
-          }
-      } catch (error) {
-        console.log(error);
-      }
-}

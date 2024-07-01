@@ -187,29 +187,29 @@ export const useChatBot = () => {
   };
 };
 
-// export const useRealTime = (
-//   chatRoom: string,
-//   setChats: React.Dispatch<
-//     SetStateAction<
-//       {
-//         role: "user" | "assistant";
-//         content: string;
-//         link?: string | undefined;
-//       }[]
-//     >
-//   >
-// ) => {
-//   useEffect(() => {
-//     pusherCilent.subscribe(chatRoom);
-//     pusherCilent.bind("realtime-mode", (date: any) => {
-//       setChats((prev: any) => [
-//         ...prev,
-//         {
-//           role: date.chat.role,
-//           content: date.chat.message,
-//         },
-//       ]);
-//       return ()=>pusherCilent.unsubscribe('realtime-mode');
-//     });
-//   }, []);
-// };
+export const useRealTime = (
+  chatRoom: string,
+  setChats: React.Dispatch<
+    SetStateAction<
+      {
+        role: "user" | "assistant";
+        content: string;
+        link?: string | undefined;
+      }[]
+    >
+  >
+) => {
+  useEffect(() => {
+    pusherCilent.subscribe(chatRoom);
+    pusherCilent.bind("realtime-mode", (date: any) => {
+      setChats((prev: any) => [
+        ...prev,
+        {
+          role: date.chat.role,
+          content: date.chat.message,
+        },
+      ]);
+      return ()=>pusherCilent.unsubscribe('realtime-mode');
+    });
+  }, []);
+};

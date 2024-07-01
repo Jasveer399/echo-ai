@@ -472,13 +472,12 @@ export const onAichatBotAssistent = async (
             message,
             author
           );
-          //WIP:
-          //   onRealTimeChat(
-          //     checkCustomer.customer[0].chatRoom[0].id,
-          //     message,
-          //     "user",
-          //     author
-          //   );
+            onRealTimeChat(
+              checkCustomer.customer[0].chatRoom[0].id,
+              message,
+              "user",
+              author
+            );
 
           if (!checkCustomer.customer[0].chatRoom[0].mailed) {
             const user = await clerkClient.users.getUser(

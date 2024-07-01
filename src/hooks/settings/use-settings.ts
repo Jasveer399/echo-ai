@@ -1,6 +1,7 @@
 import {
   onCreateFilterQuestions,
   onCreateHelpDeskQusetion,
+  onCreateNewProduct,
   onDeleteQus,
   onDeleteUserDomain,
   onGetALLFilterQuestions,
@@ -16,6 +17,8 @@ import {
   ChangePasswordSchema,
 } from "@/schemas/auth.schema";
 import {
+  AddProductProps,
+  AddProductSchema,
   DomainSettingsProps,
   DomainSettingsSchema,
   FilterQuestionsProps,
@@ -307,5 +310,55 @@ export const useFilterQuestion = (id: string) => {
     errors,
     loading,
     isQuestions,
+  };
+};
+
+export const useProducts = (domainId: string) => {
+  const { toast } = useToast();
+  const [loading, setLoading] = useState<boolean>(false);
+  const {
+    register,
+    reset,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<AddProductProps>({ resolver: zodResolver(AddProductSchema) });
+  const onCreateProduct = handleSubmit(async (values) => {
+    try {
+      setLoading(true);
+      const image = values.image[0];
+      if (!image) return;
+      const formData = new FormData();
+      formData.append("image", image);
+      const response = await axios.post("/api/uploadimage", formData);
+      const data = await response.data;
+
+      console.log(data);
+      const url = data.data.secure_url;
+
+      const product = await onCreateNewProduct(
+        domainId,
+        values.name,
+        values.price,
+        url
+      );
+      if (product?.status == 200) {
+        reset();
+       
+        toast({
+          title: "Success",
+          description: product.message,
+        });
+      }
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  return {
+    loading,
+    onCreateProduct,
+    register,
+    errors,
   };
 };

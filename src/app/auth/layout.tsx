@@ -26,7 +26,7 @@ const Layout = async ({ children }: Props) => {
         {children}
       </div>
       <div className="hidden lg:flex flex-1 w-full max-h-full max-w-4000px overflow-hidden relative flex-col pt-10 pl-24 gap-3">
-        <h2 className="text-gravel md:text-4xl font-bold">Hi, I'm AI Powered sales assistant, Echo!</h2>
+      <h2 className='text-gravel md:text-4xl font-bold'>Hi, I&apos;m AI Powered sales assistant, Echo!</h2>
         <p>
           Echo is capable of capturing lead information without a form...
           <br />

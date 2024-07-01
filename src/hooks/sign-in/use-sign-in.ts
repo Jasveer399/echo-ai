@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-export const userSignInForm = () => {
+export const useSignInForm = () => {
   const { signIn, isLoaded, setActive } = useSignIn();
   const { toast } = useToast();
   const [loading, setLoading] = useState<boolean>(false);

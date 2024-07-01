@@ -9,15 +9,12 @@ import React from "react";
 type Props = {};
 
 const SettingsPage = (props: Props) => {
-  // const {expand} = useSidebar();
   return (
     <div  className="overflow-auto w-full chat-window flex-1 h-0">
       <Infobar />
-      {/* <div className="overflow-y-auto w-full chat-window flex-1 h-0 flex flex-col gap-10"> */}
         <Billingsetting />
         <DarkModeToggle />
         <ChangePassword />
-      {/* </div> */}
     </div>
   );
 };

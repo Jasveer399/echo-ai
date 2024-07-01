@@ -1,7 +1,7 @@
 "use client";
 import { Loader } from "@/components/loader";
 import { AuthContextProvider } from "@/context/use-authcontex";
-import { userSignInForm } from "@/hooks/sign-in/use-sign-in";
+import { useSignInForm } from "@/hooks/sign-in/use-sign-in";
 import React from "react";
 import { FormProvider } from "react-hook-form";
 
@@ -10,7 +10,7 @@ type Props = {
 };
 
 const SignInFormProvider = ({ children }: Props) => {
-  const { mathods, loading, onHandelSubmit } = userSignInForm();
+  const { mathods, loading, onHandelSubmit } = useSignInForm();
   console.log(loading);
   return (
     <div>

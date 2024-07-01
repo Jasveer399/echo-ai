@@ -32,6 +32,7 @@ import axios from "axios";
 import { Spinner } from "../spinner";
 import UploadImage from "./UploadImage";
 import { generateText } from "@/actions/bot";
+import { useRouter } from "next/navigation";
 
 type itemProps = {
   quote: string;
@@ -46,6 +47,7 @@ const HomeSection = (props: Props) => {
   const { user } = useUser();
   const email = user?.primaryEmailAddress?.emailAddress;
   const imageUrl = user?.imageUrl;
+  const router = useRouter();
 
   const itemsRef = useRef<itemProps[]>([]);
   const [itemid, setItemId] = useState<number>(0);
@@ -91,6 +93,10 @@ const HomeSection = (props: Props) => {
       });
     }
   };
+  
+  const getstart = ()=>{
+    router.push("/dashboard")
+  }
 
   const getAllComments = async () => {
     try {
@@ -125,10 +131,6 @@ const HomeSection = (props: Props) => {
     getAllComments();
   }, []);
 
-  const gettext = async () => {
-    const res = await generateText(text);
-    console.log("Ai Response: ", res);
-  };
 
   return (
     <>
@@ -161,7 +163,7 @@ const HomeSection = (props: Props) => {
           <p className="text-center max-w-[500px]">
             Your AI powered sales assistant! Embed Echo AI into any website
           </p>
-          <Button className="bg-orange font-bold text-white px-4">
+          <Button onClick={getstart} className="bg-orange font-bold text-white px-4">
             Start For Free
           </Button>
           <Image
@@ -182,7 +184,7 @@ const HomeSection = (props: Props) => {
         </h2>
         <p className="text-muted-foreground text-center max-w-lg">
           Our straightforward pricing plans are tailored to meet your needs. If
-          you're not ready to commit, you can get started for free.
+          you&apos;re not ready to commit, you can get started for free.
         </p>
         <div className="flex flex-wrap mt-6 justify-center gap-6 mb-32">
           {pricingCards.map((card, index) => (
@@ -280,7 +282,7 @@ const HomeSection = (props: Props) => {
           </div>
         </div>
         <p className="text-muted-foreground text-center max-w-lg">
-          Don't just take our word for it. Here's what real people are saying
+          Don&apos;t just take our word for it. Here&apos;s what real people are saying
           about Echo AI.
         </p>
         <div className="mb-10">
@@ -304,8 +306,6 @@ const HomeSection = (props: Props) => {
           )}
         </div>
       </section>
-      <Input onChange={(e) => setText(e.target.value)} type="text" />
-      <Button onClick={gettext}>Submit</Button>
     </>
   );
 };
