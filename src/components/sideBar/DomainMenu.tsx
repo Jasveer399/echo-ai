@@ -66,7 +66,9 @@ const DomainMenu = ({ min, domains }: Props) => {
           </Loader>
         </AppDrawer>
       </div>
-      <div className="flex flex-col gap-1 text-ironside font-medium">
+      <divclassName={`flex flex-col gap-1 text-ironside font-medium ${
+          min ? "items-center ml-2" : ""
+        }`}>
         {domains &&
           domains.map((domain) => (
             <Link
@@ -81,8 +83,8 @@ const DomainMenu = ({ min, domains }: Props) => {
               <Image
                 src={domain.icon!}
                 alt="Logo"
-                width={min?40:70}
-                height={min?40:70}
+                width={30}
+                height={30}
               />
               {!min && <p className="texts">{domain.name}</p>}
             </Link>
