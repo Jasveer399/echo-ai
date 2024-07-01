@@ -35,11 +35,11 @@ const CodeSnippet = ({ id }: Props) => {
     document.body.appendChild(iframe)
     
     window.addEventListener("message", (e) => {
-        if(e.origin !== "https://echo-ai399.vercel.app/") return null
+        if(e.origin !== "https://echo-ai399.vercel.app") return null
         let dimensions = JSON.parse(e.data)
         iframe.width = dimensions.width
         iframe.height = dimensions.height
-        iframe.contentWindow.postMessage("98cbc9de-cf54-4eb2-896e-08cb42d16565", "https://echo-ai399.vercel.app/")
+        iframe.contentWindow.postMessage("${id}", "https://echo-ai399.vercel.app/")
     })
         </script>
         `;
