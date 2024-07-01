@@ -1,15 +1,15 @@
-'use client'
-import Section from '@/components/section_lable/Section'
-import { useToast } from '@/components/ui/use-toast'
-import { Copy } from 'lucide-react'
-import React from 'react'
+"use client";
+import Section from "@/components/section_lable/Section";
+import { useToast } from "@/components/ui/use-toast";
+import { Copy } from "lucide-react";
+import React from "react";
 
 type Props = {
-  id: string
-}
+  id: string;
+};
 
 const CodeSnippet = ({ id }: Props) => {
-  const { toast } = useToast()
+  const { toast } = useToast();
   let snippet = `
  <script>
     const iframe = document.createElement("iframe");
@@ -30,19 +30,19 @@ const CodeSnippet = ({ id }: Props) => {
         }
     ')
     
-    iframe.src = "http://localhost:3000/chatbot"
+    iframe.src = "https://echo-ai399.vercel.app/chatbot"
     iframe.classList.add('chat-frame')
     document.body.appendChild(iframe)
     
     window.addEventListener("message", (e) => {
-        if(e.origin !== "http://localhost:3000") return null
+        if(e.origin !== "https://echo-ai399.vercel.app/") return null
         let dimensions = JSON.parse(e.data)
         iframe.width = dimensions.width
         iframe.height = dimensions.height
-        iframe.contentWindow.postMessage("98cbc9de-cf54-4eb2-896e-08cb42d16565", "http://localhost:3000/")
+        iframe.contentWindow.postMessage("98cbc9de-cf54-4eb2-896e-08cb42d16565", "https://echo-ai399.vercel.app/")
     })
         </script>
-        `
+        `;
 
   return (
     <div className="mt-10 flex flex-col gap-5 items-start">
@@ -54,11 +54,11 @@ const CodeSnippet = ({ id }: Props) => {
         <Copy
           className="absolute top-5 right-5 text-gray-400 cursor-pointer"
           onClick={() => {
-            navigator.clipboard.writeText(snippet)
+            navigator.clipboard.writeText(snippet);
             toast({
-              title: 'Copied to clipboard',
-              description: 'You can now paste the code inside your website',
-            })
+              title: "Copied to clipboard",
+              description: "You can now paste the code inside your website",
+            });
           }}
         />
         <pre>
@@ -66,7 +66,7 @@ const CodeSnippet = ({ id }: Props) => {
         </pre>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CodeSnippet
+export default CodeSnippet;
